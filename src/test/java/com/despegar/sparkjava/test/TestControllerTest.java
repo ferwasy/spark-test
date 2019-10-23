@@ -18,11 +18,11 @@ import spark.servlet.SparkApplication;
  */
 public class TestControllerTest {
 
-	public static class TestContollerTestSparkApplication implements SparkApplication {
+	public static class TestControllerTestSparkApplication implements SparkApplication {
 		@Override
 		public void init() {
 			System.out.println("Test application initialized");
-			new TestController();
+			new TestController(testServer.getInstance());
 		}
 
 		@Override
@@ -34,7 +34,7 @@ public class TestControllerTest {
 	}
 	
 	@ClassRule
-	public static SparkServer<TestContollerTestSparkApplication> testServer = new SparkServer<>(TestControllerTest.TestContollerTestSparkApplication.class, 4567);
+	public static SparkServer<TestControllerTestSparkApplication> testServer = new SparkServer<>(TestControllerTest.TestControllerTestSparkApplication.class, 4567);
 	
 	@Test
 	public void test() throws Exception {

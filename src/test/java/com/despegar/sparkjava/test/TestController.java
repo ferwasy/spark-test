@@ -1,9 +1,8 @@
 package com.despegar.sparkjava.test;
 
-import static spark.Spark.get;
-
 import spark.Request;
 import spark.Response;
+import spark.Service;
 
 /**
  * The class that defines a Spark Web Framework route
@@ -12,8 +11,8 @@ import spark.Response;
  */
 public class TestController {
 
-	public TestController() {
-		get("/test", (request, response) ->  this.testMethod(request, response));
+	public TestController(Service service) {
+		service.get("/test", (request, response) ->  this.testMethod(request, response));
 	}
 	
 	public String testMethod(Request request, Response response) {

@@ -21,6 +21,8 @@ import spark.Service;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
+import static spark.Service.ignite;
+
 /**
  * The server for running the test's {@link SparkApplication}
  * @author Fernando Wasylyszyn
@@ -32,6 +34,8 @@ public class SparkServer<T extends SparkApplication> extends ExternalResource {
     private T sparkApplication;
     
     private int port;
+
+    private Service instance;
     
     private String protocolHostPort;
     
@@ -71,13 +75,19 @@ public class SparkServer<T extends SparkApplication> extends ExternalResource {
      */
     @Override
     protected void before() throws Throwable {
-    	Spark.port(this.port);
+		instance = ignite();
+		instance.port(this.port);
+
     	this.sparkApplication = this.sparkApplicationClass.newInstance();
     	this.sparkApplication.init();
-    	Spark.awaitInitialization();
+		instance.awaitInitialization();
     }
-    
-    public GetMethod get(String path, boolean followRedirect) {
+
+	public Service getInstance() {
+		return instance;
+	}
+
+	public GetMethod get(String path, boolean followRedirect) {
 		return new GetMethod(this.protocolHostPort + path, followRedirect);
 	}
 	
@@ -115,7 +125,7 @@ public class SparkServer<T extends SparkApplication> extends ExternalResource {
     @Override
     protected void after() {
     	this.sparkApplication.destroy();
-    	Spark.stop();
+		instance.stop();
     }
     
 }
