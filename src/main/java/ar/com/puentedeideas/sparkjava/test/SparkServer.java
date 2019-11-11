@@ -1,5 +1,4 @@
-package com.despegar.sparkjava.test;
-
+package ar.com.puentedeideas.sparkjava.test;
 
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;
@@ -34,7 +33,7 @@ public class SparkServer<T extends SparkApplication> extends ExternalResource {
     private int port;
     
     private String protocolHostPort;
-    
+    	
     private HttpClient httpClient;
     
     /**
@@ -116,6 +115,7 @@ public class SparkServer<T extends SparkApplication> extends ExternalResource {
     protected void after() {
     	this.sparkApplication.destroy();
     	Spark.stop();
+    	Spark.awaitStop();
     }
     
 }
