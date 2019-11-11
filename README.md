@@ -12,9 +12,9 @@ Add to your **pom.xml** dependencies
 
 ```xml
 <dependency>
-    <groupId>com.despegar</groupId>
+    <groupId>ar.com.puentedeideas</groupId>
     <artifactId>spark-test</artifactId>
-    <version>1.1.6</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -24,7 +24,7 @@ Add to your **build.gradle** dependencies:
 
 ```
 dependencies {
-    testCompile "com.despegar:spark-test:1.1.6"
+    testCompile "ar.com.puentedeideas:spark-test:1.2.0"
 }
 ```
 
